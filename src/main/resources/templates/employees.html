@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Список сотрудников</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th width = "190"><a href="/">Главная страница</a></th>
+        <th width = "190"><a href="/employee/request">Добавить сотрудника</a></th>
+    </tr>
+</table>
+<hr/>
+
+<h2>Список сотрудников</h2>
+
+<hr/>
+
+<table border="1">
+    <tbody>
+    <tr>
+        <td width="10"><b>№</b></td>
+        <td width="190"> <b>Имя</b> </td>
+        <td width="190"> <b>Фамилия</b> </td>
+    </tr>
+    <tr th:each="empl: ${list}">
+     <td th:text=" ${empl.id}"></td>
+     <td th:text=" ${empl.firstName}"></td>
+     <td th:text=" ${empl.lastName}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
