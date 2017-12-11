@@ -23,11 +23,20 @@
         <td width="10"><b>№</b></td>
         <td width="190"> <b>Имя</b> </td>
         <td width="190"> <b>Фамилия</b> </td>
+        <td width="190"> <b>Отпуск</b></td>
+
     </tr>
     <tr th:each="empl: ${list}">
-     <td th:text=" ${empl.id}"></td>
-     <td th:text=" ${empl.firstName}"></td>
-     <td th:text=" ${empl.lastName}"></td>
+        <td th:text=" ${empl.id}"></td>
+        <td th:text=" ${empl.firstName}"></td>
+        <td th:text=" ${empl.lastName}"></td>
+        <td>
+            <form action="#" th:action="@{schedule/request}">
+                <input type="hidden" name="employeeId" th:value="${empl.id}"/>
+                <input type="submit" value="Запланировать"/>
+            </form>
+        </td>
+
     </tr>
     </tbody>
 </table>

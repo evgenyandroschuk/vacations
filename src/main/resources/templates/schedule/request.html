@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Планирование отпуска</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th width = "190"><a href="/">Главная страница</a></th>
+        <th width = "190"><a href="/employees">Список сотрудников</a></th>
+    </tr>
+</table>
+<hr/>
+<h2>Выберите период отпуска</h2>
+<hr/>
+
+<form action="#" th:action="@{response}">
+    Дата начала: <input type="date" name="startDate"/><br/>
+    Дата окончания: <input type="date" name="endDate"/><br/>
+    <input type="hidden" name="employeeId" th:value="${employeeId}"/>
+    <input type="submit" value="Добавить"/>
+</form>
+<hr/>
+
+</body>
+</html>
