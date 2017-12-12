@@ -2,16 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Менеджер отпусков</title>
+    <title>Невозможно добавить отпуск</title>
 </head>
 <body>
 <table border="1">
     <tr>
+        <th width = "190"><a href="/">Главная страница</a></th>
         <th width = "190"><a href="/employees">Список сотрудников</a></th>
         <th width = "190"><a href="/employee/request">Добавить сотрудника</a></th>
     </tr>
 </table>
 <hr/>
-<h1>План отпусков</h1>
+<p th:text=" ${reason}" />
+<hr/>
+
 </body>
 </html>

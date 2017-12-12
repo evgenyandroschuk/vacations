@@ -3,6 +3,7 @@ package inglobal.employee;
 import inglobal.manager.EmployeeManager;
 import inglobal.model.Employee;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -11,12 +12,8 @@ import org.springframework.stereotype.Service;
 /**
  * Created by evgenyandroshchuk on 10.12.17.
  */
-@Controller
-@Service
-@EnableAutoConfiguration
 public class EmployeeTest {
-
-
+    
     @Autowired
     EmployeeManager employeeManager;
 

@@ -20,22 +20,27 @@
 <table border="1">
     <tbody>
     <tr>
-        <td width="10"><b>№</b></td>
-        <td width="190"> <b>Имя</b> </td>
-        <td width="190"> <b>Фамилия</b> </td>
-        <td width="190"> <b>Отпуск</b></td>
+        <td width="18"><b>№</b></td>
+        <td width="170"> <b>Имя</b> </td>
+        <td width="170"> <b>Фамилия</b> </td>
+        <td> <b></b></td>
+        <td> <b>Количество дней</b></td>
+        <td> <b> <p th:text="'Даты отпусков за ' + ${year} + ' год' "/>  </b></td>
 
     </tr>
     <tr th:each="empl: ${list}">
-        <td th:text=" ${empl.id}"></td>
-        <td th:text=" ${empl.firstName}"></td>
-        <td th:text=" ${empl.lastName}"></td>
+        <td th:text=" ${empl.employee.id}"></td>
+        <td th:text=" ${empl.employee.firstName}"></td>
+        <td th:text=" ${empl.employee.lastName}"></td>
         <td>
             <form action="#" th:action="@{schedule/request}">
-                <input type="hidden" name="employeeId" th:value="${empl.id}"/>
+                <input type="hidden" name="employeeId" th:value="${empl.employee.id}"/>
                 <input type="submit" value="Запланировать"/>
             </form>
         </td>
+        <td th:text=" ${empl.countOfDays}"></td>
+        <td th:text=" ${empl.vacation}"></td>
+
 
     </tr>
     </tbody>
