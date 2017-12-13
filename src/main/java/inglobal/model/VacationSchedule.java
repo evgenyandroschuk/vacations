@@ -17,7 +17,7 @@ public class VacationSchedule {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "employee_id", nullable=false)
     private Employee employee;
 

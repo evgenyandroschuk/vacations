@@ -24,28 +24,26 @@ public class CheckManager {
     @Autowired
     private VacationScheduleRepository vacationScheduleRepository;
 
-    public boolean checkDate(Employee employee, Date startDate, Date endDate, Model model) {
+    public Pair<Boolean, String>  checkDate(Employee employee, Date startDate, Date endDate) {
 
+        Pair<Boolean, String> result;
 
         if(endDate.before(startDate)) {
-
-            model.addAttribute("reason", "Дата окончания отпуска не может быть раньше даты начала!");
-            return false;
+            return new Pair<>(false, "Дата окончания отпуска не может быть раньше даты начала!");
         }
 
         Pair<Boolean, String> cross = findCrossVacations(startDate, endDate);
         if(cross.getKey()) {
-            model.addAttribute("reason", cross.getValue());
-            return false;
+            return new Pair<>(false, cross.getValue()) ;
         }
 
         int sumOfDays = sumOfVacationDays(employee, startDate, endDate) ;
         if(sumOfDays > yearlyVacationDays ) {
-            model.addAttribute("reason", "Сумарное количество дней отпуска в году не должно превышать " + yearlyVacationDays + ", сейчас " + sumOfDays);
-            return false;
+            String reason = "Сумарное количество дней отпуска в году не должно превышать " + yearlyVacationDays + ", сейчас " + sumOfDays;
+            return new Pair<>(false, reason);
         }
 
-        return true;
+        return new Pair<>(true, "Ok");
 
 
     }

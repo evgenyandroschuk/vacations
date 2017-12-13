@@ -24,7 +24,7 @@
         <td width="170"> <b>Имя</b> </td>
         <td width="170"> <b>Фамилия</b> </td>
         <td> <b></b></td>
-        <td> <b>Количество дней</b></td>
+        <td> <b>Количество дней отпуска</b></td>
         <td> <b> <p th:text="'Даты отпусков за ' + ${year} + ' год' "/>  </b></td>
 
     </tr>
@@ -35,7 +35,7 @@
         <td>
             <form action="#" th:action="@{schedule/request}">
                 <input type="hidden" name="employeeId" th:value="${empl.employee.id}"/>
-                <input type="submit" value="Запланировать"/>
+                <input type="submit" value="Запланировать отпуск"/>
             </form>
         </td>
         <td th:text=" ${empl.countOfDays}"></td>

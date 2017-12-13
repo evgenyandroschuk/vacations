@@ -7,6 +7,7 @@ import inglobal.model.Employee;
 import inglobal.model.VacationSchedule;
 import inglobal.repository.VacationScheduleRepository;
 import javafx.scene.control.CheckMenuItem;
+import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -112,7 +113,11 @@ public class WebController {
         int emplId = Integer.parseInt(employeeId);
         Employee employee = employeeManager.findById(emplId);
 
-        if(!checkManager.checkDate(employee,start, end, model)) {
+
+        Pair<Boolean, String> checkDatePair = checkManager.checkDate(employee, start, end);
+        if(!checkDatePair.getKey()) {
+
+            model.addAttribute("reason", checkDatePair.getValue());
             return "schedule/exception";
         }
 

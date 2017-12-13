@@ -37,6 +37,10 @@ public class ScheduleManager {
 
     }
 
+    public Iterable<VacationSchedule> findAll() {
+        return repository.findAll();
+    }
+
 
 
 }

@@ -1,8 +1,11 @@
 package inglobal.employee;
 
 import inglobal.Application;
+import inglobal.manager.CheckManager;
 import inglobal.manager.EmployeeManager;
+import inglobal.manager.ScheduleManager;
 import inglobal.model.Employee;
+import inglobal.model.VacationSchedule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +14,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.ui.Model;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by evgenyandroshchuk on 10.12.17.
@@ -24,13 +32,19 @@ public class EmployeeTest {
     @Autowired
     EmployeeManager employeeManager;
 
+    @Autowired
+    ScheduleManager scheduleManager;
+
+    @Autowired
+    CheckManager checkManager;
+
     @Test
     public void createTest() {
 
         String fistName = "TestFistName";
         String lastName = "TestLastName";
 
-        System.out.println("EmployeeCreateTest start");
+        System.out.println("Employee create delete test started.............");
 
         boolean employeeManagerExist = true;
 
@@ -45,6 +59,7 @@ public class EmployeeTest {
 
             Employee testEmployee = new Employee(fistName, lastName);
             employeeManager.createEmployee(testEmployee);
+            System.out.println("Created employee " + testEmployee);
 
             boolean isExist = false;
 
@@ -67,6 +82,30 @@ public class EmployeeTest {
 
         assert employeeManagerExist : "employeeManager is empty!";
 
+        System.out.println("Employee create delete test finished.......");
+
     }
 
+    @Test
+    public void checkDateTest() {
+
+
+        System.out.println("Check date test started........");
+        VacationSchedule vacationSchedule;
+
+
+        Iterator iterator = scheduleManager.findAll().iterator();
+        if(iterator.hasNext()) {
+            vacationSchedule = (VacationSchedule) iterator.next();
+
+            Employee employee = vacationSchedule.getEmployee();
+            Date startDate = vacationSchedule.getStartDate();
+            Date endDate = vacationSchedule.getEndDate();
+
+            boolean isDeniedSameDate = checkManager.checkDate(employee, startDate, endDate).getKey();// if denied return false
+
+            assert !isDeniedSameDate : "Denied same date test Failed!!";
+
+        }
+    }
 }
