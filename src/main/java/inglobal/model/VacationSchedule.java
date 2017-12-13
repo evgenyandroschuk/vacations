@@ -1,6 +1,7 @@
 package inglobal.model;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -68,5 +69,15 @@ public class VacationSchedule {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String getStartDateStr() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        return sdf.format(startDate);
+    }
+
+    public String getEndDateStr() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        return sdf.format(endDate);
     }
 }

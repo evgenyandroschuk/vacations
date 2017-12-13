@@ -12,15 +12,43 @@
     </tr>
 </table>
 <hr/>
-<h2>Выберите период отпуска</h2>
+<h2><p th:text="'Сотрудник: ' + ${employee.firstName} + ' ' + ${employee.lastName}"/></h2>
 <hr/>
-
+<h2>Выберите период отпуска</h2>
 <form action="#" th:action="@{response}">
     Дата начала: <input type="date" name="startDate"/><br/>
+    <p/>
     Дата окончания: <input type="date" name="endDate"/><br/>
+    <p/>
     <input type="hidden" name="employeeId" th:value="${employeeId}"/>
     <input type="submit" value="Добавить"/>
 </form>
+<hr/>
+<h2>Список текущих отпусков:</h2>
+<table border="2">
+    <tbody>
+    <tr>
+        <td width="180">Дата начала</td>
+        <td width="180">Дата окончения</td>
+    </tr>
+    <tr th:each="vac: ${vacations}">
+        <td th:text="${vac.startDateStr}"></td>
+        <td th:text="${vac.endDateStr}"></td>
+        <td>
+            <form action="#" th:action="@{/delete/response}">
+                <input type="hidden" name="scheduleId" th:value="${vac.id}"/>
+                <input type="hidden" name="employeeId" th:value="${vac.employee.id}"/>
+                <input type="hidden" name="startDate" th:value="${vac.startDateStr}"/>
+                <input type="hidden" name="endDate" th:value="${vac.endDateStr}"/>
+                <input type="submit" value="Удалить"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+
+
 <hr/>
 
 </body>

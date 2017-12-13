@@ -32,7 +32,8 @@ public class WebController {
     @Autowired
     private EmployeeManager employeeManager;
 
-    //private ScheduleManager scheduleManager;
+    @Autowired
+    private ScheduleManager scheduleManager;
 
     @Autowired
     private CheckManager checkManager;
@@ -77,8 +78,18 @@ public class WebController {
     }
 
     @RequestMapping("/schedule/request")
-    public String requestSchedule(@RequestParam(value= "employeeId", required=true) String employeeId , Model model) {
+    public String requestSchedule(
+            @RequestParam(value= "employeeId", required=true) String employeeId
+            , Model model) {
+
+        int id = Integer.parseInt(employeeId);
+        Employee e = employeeManager.findById(id);
+        List<VacationSchedule> vacationSchedules = scheduleManager.findByEmployee(e);
+
         model.addAttribute("employeeId", employeeId);
+        model.addAttribute("vacations", vacationSchedules);
+        model.addAttribute("employee", e);
+
         return "schedule/request";
     }
 
@@ -109,6 +120,26 @@ public class WebController {
         scheduleRepository.save(vs);
 
         return "schedule/response";
+    }
+
+    @RequestMapping("/delete/response")
+    public String deleteVacation(
+            @RequestParam(value= "employeeId", required=true) String employeeId
+            ,@RequestParam(value="startDate", required = true) String startDate
+            ,@RequestParam(value="endDate", required = true) String endDate
+            ,@RequestParam(value="scheduleId", required = true) String scheduleId
+            ,Model model) {
+
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
+
+
+        int id = Integer.parseInt(scheduleId);
+        VacationSchedule vacationSchedule = scheduleManager.findById(id);
+        scheduleManager.deleteSchedule(vacationSchedule);
+
+        return "delete/response";
+
     }
 
 }

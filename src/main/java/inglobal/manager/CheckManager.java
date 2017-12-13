@@ -63,7 +63,8 @@ public class CheckManager {
                     (vacationSchedule.getStartDate().after(startDate) && vacationSchedule.getStartDate().before(endDate))) {
 
                 String empl = "Даты отпуска пересекаются с сотрудником " + vacationSchedule.getEmployee().getFirstName() + " "
-                        + vacationSchedule.getEmployee().getLastName();
+                        + vacationSchedule.getEmployee().getLastName() + " c " + vacationSchedule.getStartDate() + " по "
+                        + vacationSchedule.getEndDate();
 
                 return new Pair<>(true, empl) ;
 
